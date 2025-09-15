@@ -5,6 +5,7 @@ import java.util.Objects;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import my.samples.springsecurity.domain.user.UserService;
+import my.samples.springsecurity.utils.StringUtils;
 
 public class DaoPasswordEncoder implements PasswordEncoder {
 
@@ -22,7 +23,7 @@ public class DaoPasswordEncoder implements PasswordEncoder {
 
     @Override
     public boolean matches(CharSequence rawPassword, String encodedPassword) {
-        return encode(rawPassword).equals(encodedPassword);
+        return StringUtils.isNotBlank(rawPassword) && encode(rawPassword).equals(encodedPassword);
     }
 
 }
