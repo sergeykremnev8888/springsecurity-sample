@@ -8,12 +8,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * Allows to log in with a legacy password encoder and recrypt the password
  * using a new password encoder implicitly for a user.
  */
-public class OwnPasswordEncoder implements PasswordEncoder {
+public class RecryptablePasswordEncoder implements PasswordEncoder {
 
     private final PasswordEncoder legacyEncoder;
     private final PasswordEncoder newEncoder;
 
-    public OwnPasswordEncoder(PasswordEncoder legacyEncoder, PasswordEncoder newEncoder) {
+    public RecryptablePasswordEncoder(PasswordEncoder legacyEncoder, PasswordEncoder newEncoder) {
         this.legacyEncoder = Objects.requireNonNull(legacyEncoder);
         this.newEncoder = Objects.requireNonNull(newEncoder);
     }

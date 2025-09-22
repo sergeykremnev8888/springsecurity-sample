@@ -28,7 +28,7 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder(UserService userService) {
         PasswordEncoder legacyEncoder = new DaoPasswordEncoder(userService);
         PasswordEncoder newEncoder = new BCryptPasswordEncoder();
-        return new OwnPasswordEncoder(legacyEncoder, newEncoder);
+        return new RecryptablePasswordEncoder(legacyEncoder, newEncoder);
     }
 
     @Bean
