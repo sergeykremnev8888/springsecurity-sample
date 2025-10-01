@@ -1,5 +1,9 @@
 package my.samples.springsecurity.domain.user;
 
+import java.util.*;
+
+import org.thymeleaf.util.StringUtils;
+
 public class User {
 
     private long userId;
@@ -46,6 +50,25 @@ public class User {
 
     public void setMustChangePassword(boolean mustChangePassword) {
         this.mustChangePassword = mustChangePassword;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(StringUtils.toUpperCase(name, Locale.ROOT));
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        User other = (User) obj;
+        return Objects.equals(StringUtils.toUpperCase(name, Locale.ROOT),
+                              StringUtils.toUpperCase(other.name, Locale.ROOT));
     }
 
 }

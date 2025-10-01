@@ -10,5 +10,5 @@ public interface UserService {
 
     String encryptPassword(CharSequence rawPassword);
 
-    List<User> findAllUsers();
+    Set<User> findAllUsers();
 }

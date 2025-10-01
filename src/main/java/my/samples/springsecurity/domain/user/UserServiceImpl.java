@@ -1,9 +1,11 @@
 package my.samples.springsecurity.domain.user;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.util.*;
 import java.util.function.BiFunction;
+import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import my.samples.springsecurity.domain.user.dao.*;
@@ -13,7 +15,6 @@ public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
 
-    @Autowired
     public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
     }
@@ -39,27 +40,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public String encryptPassword(CharSequence rawPassword) {
         Objects.requireNonNull(rawPassword);
-
-        return userDao.encryptPassword(rawPassword.toString());
+        byte[] stringBytes = rawPassword.toString().getBytes(UTF_8);
+        return Base64.getEncoder().encodeToString(stringBytes);
     }
 
     @Override
-    public List<User> findAllUsers() {
-        //Demo implementation
-        BiFunction<Long, String, User> getUser = (id, name) -> {
-            User user = new User();
-            user.setUserId(id);
-            user.setName(name);
-            return user;
-        };
-        return List.of(getUser.apply(1L, "Sample User 1"),
-                       getUser.apply(2L, "Sample User 2"),
-                       getUser.apply(3L, "Sample User 3"));
+    public Set<User> findAllUsers() {
+        return userDao.findAll()
+                      .stream()
+                      .map(this::toUser)
+                      .collect(Collectors.toUnmodifiableSet());
     }
 
     private User toUser(UserEntity entity) {
         User user = new User();
-        user.setName(entity.getName());
+        user.setName(entity.getUserName());
         user.setPassword(entity.getPassword());
         user.setUserId(entity.getUserId());
         return user;

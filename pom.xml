@@ -19,7 +19,6 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
-        <oracle.oracle.jdbc.version>19.21.0.0</oracle.oracle.jdbc.version>
         <maven.eclipse.plugin.version>2.10</maven.eclipse.plugin.version>
     </properties>
 
@@ -38,8 +37,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.oracle.database.jdbc</groupId>
-            <artifactId>ojdbc8</artifactId>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
         </dependency>
 
         <dependency>

@@ -1,0 +1,1 @@
+insert into users (user_id, user_name, password) values (1, 'user1', 'dXNlcjE=');--Password value is "user1" in Base64

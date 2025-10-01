@@ -1,6 +1,6 @@
 package my.samples.springsecurity.domain.user.dao;
 
-import java.util.Optional;
+import java.util.*;
 
 public interface UserDao {
 
@@ -8,6 +8,6 @@ public interface UserDao {
 
     void updatePassword(String username, String newPassword);
 
-    String encryptPassword(String rawPassword);
+    List<UserEntity> findAll();
 
 }
