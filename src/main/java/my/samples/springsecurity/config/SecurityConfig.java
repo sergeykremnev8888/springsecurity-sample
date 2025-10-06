@@ -16,29 +16,32 @@ import my.samples.springsecurity.web.security.*;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.authorizeHttpRequests(requests -> requests.requestMatchers("/", "/home").permitAll()
-                                                              .anyRequest().authenticated())
-                   .formLogin(form -> form.loginPage("/login").permitAll())
-                   .logout(logout -> logout.permitAll())
-                   .build();
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.formLogin(form -> form.loginPage("/login").permitAll());
+
+        http.logout(logout -> logout.logoutSuccessUrl("/login?logout").permitAll());
+
+        http.authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated());
+
+        return http.build();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(UserService userService) {
+    PasswordEncoder passwordEncoder(UserService userService) {
         PasswordEncoder legacyEncoder = new DaoPasswordEncoder(userService);
         PasswordEncoder newEncoder = new BCryptPasswordEncoder();
         return new RecryptablePasswordEncoder(legacyEncoder, newEncoder);
     }
 
     @Bean
-    public UserDetailsPasswordService userDetailsPasswordService(UserService userService) {
+    UserDetailsPasswordService userDetailsPasswordService(UserService userService) {
         return new UserDetailsPasswordServiceImpl(userService);
     }
 
     @Bean
-    public UserDetailsService userDetailsService(UserService userService) {
+    UserDetailsService userDetailsService(UserService userService) {
         return new DaoUserDetailsService(userService);
     }
 
+    
 }

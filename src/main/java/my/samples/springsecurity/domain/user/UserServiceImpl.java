@@ -3,7 +3,6 @@ package my.samples.springsecurity.domain.user;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.util.*;
-import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
