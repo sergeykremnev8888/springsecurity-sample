@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" href="../static/css/main.css">
+    <title>Default Page</title>
+</head>
+<body>
+    <div class="page-default-container">
+        <div class="default-container">
+            <div th:inline="text">User Name:&nbsp;<span th:text="${data.userName}">unknown</span></div>
+
+            <a href="javascript: document.logoutForm.submit()"> Sign Out</a>
+            <form name="logoutForm" th:action="@{/logout}" method="post" th:hidden="true">
+                <input hidden="true" type="submit" value="Sign Out" />
+            </form>
+
+            <div class="aut">
+                <h3>List of Authorities:</h3>
+                <ul>
+                    <li th:each="authorityName : ${data.grantedAuthorityNames}" th:text="${authorityName}"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

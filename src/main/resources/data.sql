@@ -1,0 +1,1 @@
+insert into users (user_name, password) values ('admin', 'YWRtaW4=');--Password is "admin" in Base64

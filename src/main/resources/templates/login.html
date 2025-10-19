@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" href="../static/css/main.css">
+    <title>Login</title>
+</head>
+<body>
+    <div class="page-login-container">
+        <div class="login-container">
+            <div class="login-card">
+                <div th:if="${param.error}" class="error-message">Invalid username and password.</div>
+                <div th:if="${param.logout}" class="error-message">You have been logged out.</div>
+
+                <form th:action="@{/login}" method="post" class="login-form" id="loginForm" novalidate>
+                    <div class="form-group">
+                        <div class="input-wrapper">
+                            <label for="username">User Name</label>
+                            <input type="text" id="username" name=username required autofocus>
+                            <span class="input-border"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-wrapper password-wrapper">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" required autocomplete="current-password">
+                            <span class="input-border"></span>
+                        </div>
+                    </div>
+
+                    <!--<div class="form-options">
+                        <div class="remember-wrapper">
+                            <input type="checkbox" id="remember" name="remember">
+                            <label for="remember" class="checkbox-label">
+                                <span class="checkbox-custom"></span>
+                                Keep me signed in
+                            </label>
+                        </div>
+                        <a href="#" class="forgot-password">Reset password</a>
+                    </div> -->
+
+                    <button type="submit" class="login-btn">
+                        <span class="btn-text">Sign In</span>
+                        <span class="btn-loader"></span>
+                    </button>
+                </form>
+
+                <!--<div class="divider">
+                    <span>or sign in with</span>
+                </div>
+
+                <div class="sso-options">
+                    <button type="button" class="sso-btn azure-btn">
+                        <span class="sso-icon azure-icon"></span>
+                        <span>Microsoft Azure AD</span>
+                    </button>
+                    <button type="button" class="sso-btn okta-btn">
+                        <span class="sso-icon okta-icon"></span>
+                        <span>Okta</span>
+                    </button>
+                </div>
+
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <span class="separator">•</span>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                    <span class="separator">•</span>
+                    <a href="#" class="footer-link">Support</a>
+                </div>
+
+                <div class="success-message" id="successMessage">
+                    <div class="success-icon">✓</div>
+                    <h3>Authentication Successful</h3>
+                    <p>Redirecting to your workspace...</p>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
